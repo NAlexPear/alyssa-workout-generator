@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  > div {
+    padding: 0 0.5rem;
+    text-align: center;
+
+    > input:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+p {
+  font-size: 1.2rem;
+}

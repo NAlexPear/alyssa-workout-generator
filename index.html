@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Column Shuffler</title>
+    <link href='styles.scss' rel='stylesheet'/>
+  </head>
+  <body>
+    <main>
+      <h1>Generate Your Workout</h1>
+      <form>
+        <div>
+          <h2>Equipment</h2>
+          <input name='equipment' type='text' placeholder='e.g. kettlebells' required />
+        </div>
+        <div>
+          <h2>Movement</h2>
+          <input name='movement' type='text' placeholder='e.g. squats' required />
+        </div>
+        <div>
+          <h2>Duration (minutes)</h2>
+          <input name='duration' type='number' placeholder='e.g. 10' required />
+        </div>
+      </form>
+      <button disabled type='submit'>Generate Workout</button>
+      <p id='result'></p>
+    </main>
+    <script src='index.ts'></script>
+  </body>
+</html>
