@@ -4,6 +4,7 @@ type InputHandler = (elements: HTMLInputElement[]) => void
 const form = document.querySelector('form')
 const submitButton = document.querySelector('button')
 const result = document.getElementById('result')
+const count = document.querySelector('input[name="count"]')
 
 // check for the presence of at least one value in each form column
 const validateForm: InputHandler = elements => {
@@ -70,7 +71,8 @@ const setInputCount: InputHandler = elements => {
 const handleForm = (form: HTMLFormElement) => {
   const inputs = Array
     .from(form.elements)
-    .filter(element => element instanceof HTMLInputElement) as HTMLInputElement[]
+    .filter(element => element instanceof HTMLInputElement)
+    .filter((input: HTMLInputElement) => input.name !== 'count') as HTMLInputElement[]
 
   setInputCount(inputs)
   validateForm(inputs)
@@ -90,36 +92,76 @@ form.addEventListener('keyup', handleFormInteraction)
 // initialize the form once on page load
 handleForm(form)
 
+// handle "count" changes
+const handleCount = (event: InputEvent) => {
+  let prompt = 'Generate Post'
+  const element = event.target as HTMLInputElement
+  const isPlural = Number(element.value) > 1
+
+  if (isPlural) {
+    prompt += 's'
+  }
+
+  submitButton.textContent = prompt
+}
+
+// set up change listeners on "count" input
+count.addEventListener('input', handleCount)
+
+interface Accumulator {
+  count: number
+  columns: Record<string, HTMLInputElement[]>
+}
+
 // set up "generate" button listeners
 const generatePost = (event: Event) => {
   event.preventDefault()
 
-  const columns = Array
+  const {count, columns}: Accumulator = Array
     .from(form.elements)
     .filter((input: HTMLInputElement) => !!input?.value)
     .reduce(
-      (columns, input: HTMLInputElement) => ({
-        ...columns,
-        [input.name]: [...(columns[input.name] || []), input]
-      }),
-      {} as Record<string, HTMLInputElement[]>
-    )
-
-  const {pillar, filter, type} = Object
-    .entries(columns)
-    .reduce(
-      (chosenColumns, [column, choices]) => {
-        const choiceIndex = Math.round(Math.random() * (choices.length - 1))
+      ({count, columns}, input: HTMLInputElement) => {
+        if (input.name === 'count') {
+          return {
+            columns,
+            count: Number(input.value)
+          }
+        }
 
         return {
-          ...chosenColumns,
-          [column]: choices[choiceIndex].value
+          count,
+          columns: {
+            ...columns,
+            [input.name]: [...(columns[input.name] || []), input]
+          }
         }
       },
-      columns
+      {count: 1, columns: {}}
     )
 
-  result.textContent = `Today's post: ${pillar} / ${filter} / ${type}`
+  const posts = (new Array(count))
+    .fill(0)
+    .map(() => {
+      const {pillar, filter, type} = Object
+        .entries(columns)
+        .reduce(
+          (chosenColumns, [column, choices]) => {
+            const choiceIndex = Math.round(Math.random() * (choices.length - 1))
+
+            return {
+              ...chosenColumns,
+              [column]: choices[choiceIndex].value
+            }
+          },
+          columns
+        )
+
+      return `<li>${pillar} / ${filter} / ${type}</li>`
+    })
+    .join('\n')
+
+  result.innerHTML = posts
 }
 
 submitButton.addEventListener('click', generatePost)

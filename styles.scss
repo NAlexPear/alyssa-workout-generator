@@ -41,8 +41,25 @@ form {
       margin-bottom: 1rem;
     }
   }
+
+  > span {
+    font-size: 1.5rem;
+    grid-column: -1 / 1;
+    padding: 3rem 0;
+    text-align: center;
+
+    input {
+      margin-right: 1rem;
+      width: 10rem;
+    }
+  }
 }
 
-p {
-  font-size: 1.2rem;
+ul {
+  font-size: 2rem;
+  list-style: none;
+
+  > li {
+    margin: 1rem;
+  }
 }

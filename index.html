@@ -19,9 +19,15 @@
           <h2>Types</h2>
           <input name='type' type='text' placeholder='Add a type' required />
         </div>
+        <span>
+          <label for='count'>
+            Number of posts to generate:
+            <input name='count' type='number' value='1' min='1'/>
+          </label>
+          <button disabled type='submit'>Generate Post</button>
+        </span>
       </form>
-      <button disabled type='submit'>Generate Post</button>
-      <p id='result'></p>
+      <ul id='result'></ul>
     </main>
     <script src='index.ts'></script>
   </body>
