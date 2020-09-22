@@ -1,26 +1,26 @@
 <html>
   <head>
-    <title>Column Shuffler</title>
+    <title>Social Media Post Generator</title>
     <link href='styles.scss' rel='stylesheet'/>
   </head>
   <body>
     <main>
-      <h1>Generate Your Workout</h1>
+      <h1>Social Media Post Generator</h1>
       <form>
         <div>
-          <h2>Equipment</h2>
-          <input name='equipment' type='text' placeholder='e.g. kettlebells' required />
+          <h2>Pillars</h2>
+          <input name='pillar' type='text' placeholder='Add a pillar' required />
         </div>
         <div>
-          <h2>Movement</h2>
-          <input name='movement' type='text' placeholder='e.g. squats' required />
+          <h2>Filters</h2>
+          <input name='filter' type='text' placeholder='Add a filter' required />
         </div>
         <div>
-          <h2>Duration (minutes)</h2>
-          <input name='duration' type='number' placeholder='e.g. 10' required />
+          <h2>Types</h2>
+          <input name='type' type='text' placeholder='Add a type' required />
         </div>
       </form>
-      <button disabled type='submit'>Generate Workout</button>
+      <button disabled type='submit'>Generate Post</button>
       <p id='result'></p>
     </main>
     <script src='index.ts'></script>

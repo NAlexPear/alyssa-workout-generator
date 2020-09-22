@@ -14,9 +14,9 @@ const validateForm: InputHandler = elements => {
         [input.name]: columns[input.name] || !!input.value?.trim()
       }),
       {
-        duration: false,
-        equipment: false,
-        movement: false,
+        pillar: false,
+        filter: false,
+        type: false,
       }
     )
 
@@ -91,8 +91,9 @@ form.addEventListener('keyup', handleFormInteraction)
 handleForm(form)
 
 // set up "generate" button listeners
-const generateWorkout = (event: Event) => {
+const generatePost = (event: Event) => {
   event.preventDefault()
+
   const columns = Array
     .from(form.elements)
     .filter((input: HTMLInputElement) => !!input?.value)
@@ -104,7 +105,7 @@ const generateWorkout = (event: Event) => {
       {} as Record<string, HTMLInputElement[]>
     )
 
-  const {equipment, movement, duration} = Object
+  const {pillar, filter, type} = Object
     .entries(columns)
     .reduce(
       (chosenColumns, [column, choices]) => {
@@ -118,7 +119,7 @@ const generateWorkout = (event: Event) => {
       columns
     )
 
-  result.textContent = `Your workout: ${equipment} ${movement} for ${duration} minutes`
+  result.textContent = `Today's post: ${pillar} / ${filter} / ${type}`
 }
 
-submitButton.addEventListener('click', generateWorkout)
+submitButton.addEventListener('click', generatePost)
