@@ -2,8 +2,8 @@ type InputHandler = (elements: HTMLInputElement[]) => void
 
 window.addEventListener('load', () => {
   // query global elements
-  const form = document.querySelector('form')
-  const submitButton = document.querySelector('button')
+  const form = document.getElementById('post-form')
+  const submitButton = document.getElementById('generate')
   const result = document.getElementById('result')
   const count = document.querySelector('input[name="count"]')
 

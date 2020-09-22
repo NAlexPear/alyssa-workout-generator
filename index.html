@@ -7,7 +7,7 @@
   <body>
     <main>
       <h1>Social Media Post Generator</h1>
-      <form>
+      <form id='post-form'>
         <div>
           <h2>Pillars</h2>
           <input name='pillar' type='text' placeholder='Add a pillar' required />
@@ -25,7 +25,7 @@
             Number of posts to generate:
             <input name='count' type='number' value='1' min='1'/>
           </label>
-          <button disabled type='submit'>Generate Post</button>
+          <button disabled type='submit' id='generate'>Generate Post</button>
         </span>
       </form>
       <ul id='result'></ul>
